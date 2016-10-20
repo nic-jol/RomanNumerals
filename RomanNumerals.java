@@ -36,28 +36,32 @@ public class RomanNumerals
         int inputLength = userInput.length();
         if ((inputLength > 0) && (inputLength < 5))
         {
-            for(int i = 0; i < 0; i++)
+            for(int i = 0; i < inputLength; i++)
             {
                 char nextCharacter = userInput.charAt(i);
-                System.out.println(nextCharacter);
                 if (Character.isDigit(nextCharacter) == false)
                 {
                     // Make a method for this later
-                    System.out.print("Sorry! That's not quite right.");
+                    System.out.println("Sorry! That's not quite right.");
                     System.exit(0);
                 }
             }
         }
         else
         {
-            System.out.print("Sorry! That's not quite right.");
+            System.out.println("Sorry! That's not quite right.");
             System.exit(0);            
         }
         // Set original number
         arabicNum = Integer.parseInt(userInput);
         
         // Get the places
-        switch (inputLength)
+        setPlaces(inputLength);
+    }
+    
+    private void setPlaces(int numLength)
+    {
+        switch (numLength)
         {
         case 4:
             thousandsPlace = arabicNum / 1000;
@@ -77,7 +81,7 @@ public class RomanNumerals
         default:
             onesPlace = arabicNum % 10;
             break;     
-        }            
+        }
     }
     
     /**** Get Methods ****/
@@ -110,4 +114,108 @@ public class RomanNumerals
     {
         return romanNumeral;
     }
+    
+    /**** Operational Methods ****/
+    public String createRomanNum()
+    {
+		if (thousandsPlace > 0)
+			romNumThousands();
+	    if (hundredsPlace > 0)
+	        romNumHundreds();
+	    if (tensPlace > 0)
+            romNumTens();
+	    if (onesPlace > 0)
+	        romNumOnes();
+	    return romanNumeral;
+	}
+	
+	private void romNumThousands()
+	{
+		for (int i = thousandsPlace; i > 0; i--)
+		    romanNumeral = romanNumeral + "M";
+    }
+    
+    private void romNumHundreds()
+    {
+		String symbol = "C";
+		
+		int div5Rem = hundredsPlace % 5;
+		
+		if (hundredsPlace >= 1 && hundredsPlace <= 3)
+		{
+			romanNumeral = romanNumeral + remainder123(symbol, hundredsPlace);
+	    }
+	    else if (hundredsPlace == 4)
+	    {
+			romanNumeral = romanNumeral + "CD";
+		}
+		else if (hundredsPlace >= 5 && hundredsPlace <= 8)
+		{
+			romanNumeral = romanNumeral + "D" + remainder123(symbol, div5Rem);
+		}
+		else
+		{
+			romanNumeral = romanNumeral + "CM";
+		}
+    }
+    
+    private void romNumTens()
+    {
+		String symbol = "X";
+		
+		int div5Rem = tensPlace % 5;
+		
+		if (tensPlace >= 1 && tensPlace <= 3)
+		{
+			romanNumeral = romanNumeral + remainder123(symbol, tensPlace);
+	    }
+	    else if (tensPlace == 4)
+	    {
+			romanNumeral = romanNumeral + "XL";
+		}
+		else if (tensPlace >= 5 && tensPlace <= 8)
+		{
+			romanNumeral = romanNumeral + "L" + remainder123(symbol, div5Rem);
+		}
+		else
+		{
+			romanNumeral = romanNumeral + "XC";
+		}
+    }
+
+    private void romNumOnes()
+    {
+		String symbol = "I";
+		
+		int div5Rem = onesPlace % 5;
+		
+		if (onesPlace >= 1 && onesPlace <= 3)
+		{
+			romanNumeral = romanNumeral + remainder123(symbol, onesPlace);
+	    }
+	    else if (onesPlace == 4)
+	    {
+			romanNumeral = romanNumeral + "IV";
+		}
+		else if (onesPlace >= 5 && onesPlace <= 8)
+		{
+			romanNumeral = romanNumeral + "V" + remainder123(symbol, div5Rem);
+		}
+		else
+		{
+			romanNumeral = romanNumeral + "IX";
+		}
+    }
+    
+    private String remainder123(String symbol, int iterations)
+    {
+		String addition = "";
+		for (int i = iterations; i > 0; i--)
+		{
+			addition = addition + symbol;
+		}
+		
+		return addition;
+	}		
+		
 }
