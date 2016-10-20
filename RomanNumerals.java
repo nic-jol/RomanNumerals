@@ -36,28 +36,32 @@ public class RomanNumerals
         int inputLength = userInput.length();
         if ((inputLength > 0) && (inputLength < 5))
         {
-            for(int i = 0; i < 0; i++)
+            for(int i = 0; i < inputLength; i++)
             {
                 char nextCharacter = userInput.charAt(i);
-                System.out.println(nextCharacter);
                 if (Character.isDigit(nextCharacter) == false)
                 {
                     // Make a method for this later
-                    System.out.print("Sorry! That's not quite right.");
+                    System.out.println("Sorry! That's not quite right.");
                     System.exit(0);
                 }
             }
         }
         else
         {
-            System.out.print("Sorry! That's not quite right.");
+            System.out.println("Sorry! That's not quite right.");
             System.exit(0);            
         }
         // Set original number
         arabicNum = Integer.parseInt(userInput);
         
         // Get the places
-        switch (inputLength)
+        setPlaces(inputLength);
+    }
+    
+    private void setPlaces(int numLength)
+    {
+        switch (numLength)
         {
         case 4:
             thousandsPlace = arabicNum / 1000;
@@ -77,7 +81,7 @@ public class RomanNumerals
         default:
             onesPlace = arabicNum % 10;
             break;     
-        }            
+        }
     }
     
     /**** Get Methods ****/
@@ -110,4 +114,58 @@ public class RomanNumerals
     {
         return romanNumeral;
     }
+    
+    /**** Operational Methods ****/
+    public String createRomanNum()
+    {
+		if (thousandsPlace > 0)
+			romNumThousands();
+	    if (hundredsPlace > 0)
+	        onesTensHuns("C", "D", "M", hundredsPlace);
+	    if (tensPlace > 0)
+            onesTensHuns("X", "L", "C", tensPlace);
+	    if (onesPlace > 0)
+	        onesTensHuns("I", "V", "X", onesPlace);
+	    return romanNumeral;
+	}
+	
+	private void romNumThousands()
+	{
+		for (int i = thousandsPlace; i > 0; i--)
+		    romanNumeral = romanNumeral + "M";
+    }
+    
+    private void onesTensHuns(String symbol1, String symbol5,  String nextSymbol, int whichAttribute)
+    {
+
+		int div5Rem = whichAttribute % 5;
+		
+		if (whichAttribute >= 1 && whichAttribute <= 3)
+		{
+			romanNumeral = romanNumeral + remainder123(symbol1, whichAttribute);
+	    }
+	    else if (whichAttribute == 4)
+	    {
+			romanNumeral = romanNumeral + symbol1 + symbol5;
+		}
+		else if (whichAttribute >= 5 && whichAttribute <= 8)
+		{
+			romanNumeral = romanNumeral + symbol5 + remainder123(symbol1, div5Rem);
+		}
+		else
+		{
+			romanNumeral = romanNumeral + symbol1 + nextSymbol;
+		}
+	}	
+
+    private String remainder123(String symbol, int iterations)
+    {
+		String addition = "";
+		for (int i = iterations; i > 0; i--)
+		{
+			addition = addition + symbol;
+		}
+		
+		return addition;
+	}
 }
