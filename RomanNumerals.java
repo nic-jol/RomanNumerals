@@ -1,3 +1,16 @@
+/* To work on in regards to this program:
+ * (1) GUI
+ * (2) Allow the user to ask for multiple numbers
+ * (3) Display a better looking table (columns??)
+ * (4) Make the displaying table thing a method
+ * (5) Have user set how many numbers to display in the table
+ * (6) Run this program outside command prompt
+ * (7) Compare results to file of results
+ * (8) Javadoc
+ * (9) Random roman numerals
+ * (10) Roman Numeral test
+ */
+
 import java.util.Scanner;
 import java.lang.*;
 
