@@ -17,8 +17,31 @@ public class RomanNumeralsTest
         //System.out.println(result);
         
         RomanNumerals number2 = new RomanNumerals();
-        number2.setIntegers();
+        //number2.setIntegers();
         
-        System.out.println(number2.createRomanNum());   
+        //System.out.println(number2.createRomanNum()); 
+        //System.out.println("111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999"); 
+
+        for (int i = 0; i < 1; i++)
+        {
+            number2.setHundreds(i);
+            for (int j = 0; j < 10; j++)
+            {
+                number2.setTens(j);
+                for (int k = 0; k < 10; k++)
+                {
+                   // System.out.println(number2.getOnes()); 
+                    number2.setOnes(k);
+                    number2.setArabicNumber((number2.getHundreds()*100) + (number2.getTens()*10) + number2.getOnes());
+                    if (number2.getOnes() == 0 && number2.getTens() == 0 && number2.getHundreds() == 0){
+                    }
+                    else
+                    {
+                        System.out.printf("%16s", number2.getArabicNum() + " " + number2.createRomanNum());
+                    }
+                }
+            }
+        }            
     }
+    
 }
