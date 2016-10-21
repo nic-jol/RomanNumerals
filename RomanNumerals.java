@@ -5,21 +5,31 @@ public class RomanNumerals
 {
     /**** ATTRIBUTES ****/
     private int arabicNum;
-    private int thousandsPlace;
-    private int hundredsPlace;
-    private int tensPlace;
-    private int onesPlace;
+    private int thousandsPlaceArabic;
+    private int hundredsPlaceArabic;
+    private int tensPlaceArabic;
+    private int onesPlaceArabic;
+    
     private String romanNumeral;
+    private String thousandsPlaceRoman;
+    private String hundredsPlaceRoman;
+    private String tensPlaceRoman;
+    private String onesPlaceRoman;
     
     /**** CONSTRUCTORS ****/
     public RomanNumerals()
     {
         arabicNum = 0;
-        thousandsPlace = 0;
-        hundredsPlace = 0;
-        tensPlace = 0;
-        onesPlace = 0;
-        romanNumeral = "";       
+        thousandsPlaceArabic = 0;
+        hundredsPlaceArabic = 0;
+        tensPlaceArabic = 0;
+        onesPlaceArabic = 0;
+        
+        romanNumeral = "";
+        thousandsPlaceRoman = "";
+        hundredsPlaceRoman = "";
+        tensPlaceRoman = "";
+        onesPlaceRoman = "";
     }
     
     //METHODS
@@ -64,25 +74,55 @@ public class RomanNumerals
         switch (numLength)
         {
         case 4:
-            thousandsPlace = arabicNum / 1000;
-            hundredsPlace = (arabicNum - (1000 * thousandsPlace)) / 100;
-            tensPlace = (arabicNum - ((1000 * thousandsPlace) + (100 * hundredsPlace))) / 10;
-            onesPlace = arabicNum % 10;
+            thousandsPlaceArabic = arabicNum / 1000;
+            hundredsPlaceArabic = (arabicNum - (1000 * thousandsPlaceArabic)) / 100;
+            tensPlaceArabic = (arabicNum - ((1000 * thousandsPlaceArabic) + (100 * hundredsPlaceArabic))) / 10;
+            onesPlaceArabic = arabicNum % 10;
             break;
         case 3:
-            hundredsPlace = arabicNum / 100;
-            tensPlace = (arabicNum - (100 * hundredsPlace)) /10;
-            onesPlace = arabicNum % 10;
+            hundredsPlaceArabic = arabicNum / 100;
+            tensPlaceArabic = (arabicNum - (100 * hundredsPlaceArabic)) /10;
+            onesPlaceArabic = arabicNum % 10;
             break;
         case 2:
-            tensPlace = arabicNum / 10;
-            onesPlace = arabicNum % 10;
+            tensPlaceArabic = arabicNum / 10;
+            onesPlaceArabic = arabicNum % 10;
             break;
         default:
-            onesPlace = arabicNum % 10;
+            onesPlaceArabic = arabicNum % 10;
             break;     
         }
     }
+    
+    public void setArabicNumber(int newAN)
+    {
+        arabicNum = newAN;
+    }
+    public void setOnes(int newOnes)
+    {
+        onesPlaceArabic = newOnes;
+    }
+    
+    public void setTens(int newTens)
+    {
+        tensPlaceArabic = newTens;
+    }
+    
+    public void setHundreds(int newHundreds)
+    {
+        hundredsPlaceArabic = newHundreds;
+    }
+
+    public void setThousands(int newThousands)
+    {
+        thousandsPlaceArabic = newThousands;
+    }
+    
+    public void setRomanNumeral (String newRN)
+    {
+        romanNumeral = newRN;
+    }
+    
     
     /**** Get Methods ****/
     public int getArabicNum()
@@ -92,22 +132,22 @@ public class RomanNumerals
     
     public int getThousands()
     {
-        return thousandsPlace;
+        return thousandsPlaceArabic;
     }
   
     public int getHundreds()
     {
-        return hundredsPlace;
+        return hundredsPlaceArabic;
     }
     
     public int getTens()
     {
-        return tensPlace;
+        return tensPlaceArabic;
     }
  
     public int getOnes()
     {
-        return onesPlace;
+        return onesPlaceArabic;
     }
     
     public String getRomanNumeral()
@@ -118,44 +158,51 @@ public class RomanNumerals
     /**** Operational Methods ****/
     public String createRomanNum()
     {
-		if (thousandsPlace > 0)
+		if (thousandsPlaceArabic > 0)
 			romNumThousands();
-	    if (hundredsPlace > 0)
-	        onesTensHuns("C", "D", "M", hundredsPlace);
-	    if (tensPlace > 0)
-            onesTensHuns("X", "L", "C", tensPlace);
-	    if (onesPlace > 0)
-	        onesTensHuns("I", "V", "X", onesPlace);
+	    if (hundredsPlaceArabic > 0)
+	        hundredsPlaceRoman = onesTensHuns("C", "D", "M", hundredsPlaceArabic);
+	    if (tensPlaceArabic > 0)
+            tensPlaceRoman = onesTensHuns("X", "L", "C", tensPlaceArabic);
+	    if (onesPlaceArabic > 0)
+	        onesPlaceRoman = onesTensHuns("I", "V", "X", onesPlaceArabic);
+        romanNumeral = thousandsPlaceRoman + hundredsPlaceRoman + tensPlaceRoman + onesPlaceRoman;
 	    return romanNumeral;
 	}
 	
 	private void romNumThousands()
 	{
-		for (int i = thousandsPlace; i > 0; i--)
-		    romanNumeral = romanNumeral + "M";
+		String newThousandPlaceRN = "";
+        for (int i = thousandsPlaceArabic; i > 0; i--)
+        {
+            newThousandPlaceRN = newThousandPlaceRN + "M"; 
+        } 
+        thousandsPlaceRoman = newThousandPlaceRN;
     }
     
-    private void onesTensHuns(String symbol1, String symbol5,  String nextSymbol, int whichAttribute)
+    private String onesTensHuns(String symbol1, String symbol5,  String nextSymbol, int whichAttribute)
     {
-
+        String newPlace = "";
+        
 		int div5Rem = whichAttribute % 5;
 		
 		if (whichAttribute >= 1 && whichAttribute <= 3)
 		{
-			romanNumeral = romanNumeral + remainder123(symbol1, whichAttribute);
+			newPlace = newPlace + remainder123(symbol1, whichAttribute);
 	    }
 	    else if (whichAttribute == 4)
 	    {
-			romanNumeral = romanNumeral + symbol1 + symbol5;
+			newPlace = newPlace + symbol1 + symbol5;
 		}
 		else if (whichAttribute >= 5 && whichAttribute <= 8)
 		{
-			romanNumeral = romanNumeral + symbol5 + remainder123(symbol1, div5Rem);
+			newPlace = newPlace + symbol5 + remainder123(symbol1, div5Rem);
 		}
 		else
 		{
-			romanNumeral = romanNumeral + symbol1 + nextSymbol;
+			newPlace = newPlace + symbol1 + nextSymbol;
 		}
+        return newPlace;
 	}	
 
     private String remainder123(String symbol, int iterations)
