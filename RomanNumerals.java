@@ -39,7 +39,7 @@ public class RomanNumerals
         // Get arabic number from user
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter a number to convert to Roman Numerals");
-        System.out.print("(Number should be between 1 and 9999): ");
+        System.out.print("(Number should be between 1 and 3999): ");
         String userInput = keyboard.nextLine();
         
         // Analyze input
@@ -71,6 +71,12 @@ public class RomanNumerals
     
     private void setPlaces(int numLength)
     {
+        if (arabicNum > 3999)
+        {
+            System.out.println("Sorry! That's not quite right.");
+            System.exit(0);
+        }
+            
         switch (numLength)
         {
         case 4:

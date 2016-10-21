@@ -17,13 +17,27 @@ public class RomanNumeralsTest
         //System.out.println(result);
         
         RomanNumerals number2 = new RomanNumerals();
-        //number2.setIntegers();
+        number2.setIntegers();
         
         //System.out.println(number2.createRomanNum()); 
         //System.out.println("111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999"); 
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 2; i++)
         {
+            if (i == 1)
+            {
+                number2.setArabicNumber(100);
+                String whoCares = number2.createRomanNum();
+                int araNumLength = ("" + number2.getArabicNum()).length();
+                int romNumLength = number2.getRomanNumeral().length();
+                int numSpaces = 13 - (araNumLength + romNumLength);
+                String justSpaces = "";
+                for (int l = numSpaces; l > 0; l--)
+                    justSpaces = justSpaces + " ";
+                System.out.print(number2.getArabicNum() + justSpaces + number2.getRomanNumeral() + " | ");
+                break;
+            }
+                
             number2.setHundreds(i);
             for (int j = 0; j < 10; j++)
             {
@@ -37,11 +51,20 @@ public class RomanNumeralsTest
                     }
                     else
                     {
-                        System.out.printf("%16s", number2.getArabicNum() + " " + number2.createRomanNum());
+                        String whoCares = number2.createRomanNum();
+                        int araNumLength = ("" + number2.getArabicNum()).length();
+                        int romNumLength = number2.getRomanNumeral().length();
+                        int numSpaces = 13 - (araNumLength + romNumLength);
+                        String justSpaces = "";
+                        for (int l = numSpaces; l > 0; l--)
+                            justSpaces = justSpaces + " ";
+                        System.out.print(number2.getArabicNum() + justSpaces + number2.getRomanNumeral() + " | ");
+                        
+                        //System.out.printf("%16s", number2.getArabicNum() + " " + number2.createRomanNum());
                     }
                 }
             }
-        }            
+        }        
     }
     
 }
