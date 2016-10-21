@@ -22,11 +22,11 @@ public class RomanNumeralsTest
         //System.out.println(number2.createRomanNum()); 
         //System.out.println("111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999"); 
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (i == 1)
+            if (i == 2)
             {
-                number2.setArabicNumber(100);
+                number2.setArabicNumber(200);
                 String whoCares = number2.createRomanNum();
                 int araNumLength = ("" + number2.getArabicNum()).length();
                 int romNumLength = number2.getRomanNumeral().length();
