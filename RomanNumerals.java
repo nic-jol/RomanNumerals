@@ -9,6 +9,9 @@
  * (8) Javadoc
  * (9) Random roman numerals
  * (10) Roman Numeral test
+ * (11) Overload the generating Roman Numerals Methods- 
+ *      same name for thou and hund/tens/ones, just different
+ *      parameters
  */
 
 import java.util.Scanner;
