@@ -192,4 +192,81 @@ public class RomanNumeralCalculatorTest {
         assertEquals("MMCDXXX", romanNumeral);
     }
 
+    @Test
+    void determineRomanNumeral_1_returnsI() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(1);
+
+        assertEquals("I", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_2_returnsII() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(2);
+
+        assertEquals("II", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_3_returnsIII() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(3);
+
+        assertEquals("III", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_4_returnsIV() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(4);
+
+        assertEquals("IV", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_5_returnsV() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(5);
+
+        assertEquals("V", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_6_returnsVI() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(6);
+
+        assertEquals("VI", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_7_returnsVII() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(7);
+
+        assertEquals("VII", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_8_returnsVIII() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(8);
+
+        assertEquals("VIII", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_9_returnsIX() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(9);
+
+        assertEquals("IX", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_9426_returnsMMMMMMMMMCDXXVI() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(9426);
+
+        assertEquals("MMMMMMMMMCDXXVI", romanNumeral);
+    }
+
+    @Test
+    void determineRomanNumeral_2006_returnsMMVI() {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(2006);
+
+        assertEquals("MMVI", romanNumeral);
+    }
+
 }
