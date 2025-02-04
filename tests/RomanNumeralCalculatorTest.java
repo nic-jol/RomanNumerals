@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -267,6 +269,14 @@ public class RomanNumeralCalculatorTest {
         String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(2006);
 
         assertEquals("MMVI", romanNumeral);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/romanNumerals.csv")
+    void determineRomanNumeral_allNumbersFrom1To9999_matchesExpectedRomanNumeral(int arabicNumber, String expectedRomanNumeral) {
+        String romanNumeral = RomanNumeralCalculator.determineRomanNumeral(arabicNumber);
+
+        assertEquals(expectedRomanNumeral, romanNumeral);
     }
 
 }
