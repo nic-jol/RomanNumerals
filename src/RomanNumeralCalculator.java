@@ -12,44 +12,45 @@ public class RomanNumeralCalculator {
 //                onesPlaceNumeral(arabicNumber);
     }
 
-    private static String tensPlaceNumeral(int arabicNumber) {
-        int hundredsPlace = (arabicNumber % 100) / 10;
-
-        if (hundredsPlace >= 1 && hundredsPlace <= 3) {
-            return TENS_SYMBOL.repeat(Math.max(0, hundredsPlace));
-        } else if (hundredsPlace == 4) {
-            return TENS_SYMBOL + FIFTY_SYMBOL;
-        } else if (hundredsPlace == 5) {
-            return FIFTY_SYMBOL;
-        } else if (hundredsPlace >= 6 && hundredsPlace <= 8) {
-            return FIFTY_SYMBOL + TENS_SYMBOL.repeat(Math.max(0, hundredsPlace - 5));
-        } else if (hundredsPlace == 9) {
-            return TENS_SYMBOL + HUNDREDS_SYMBOL;
-        }
-
-        return "";
+    private static String thousandsPlaceNumeral(int arabicNumber) {
+        int thousandsPlace = arabicNumber / 1000;
+        return THOUSANDS_SYMBOL.repeat(Math.max(0, thousandsPlace));
     }
 
     private static String hundredsPlaceNumeral(int arabicNumber) {
         int hundredsPlace = (arabicNumber % 1000) / 100;
 
+        return baseNumeralCalculator(hundredsPlace,
+                HUNDREDS_SYMBOL,
+                FIVE_HUNDRED_SYMBOL,
+                THOUSANDS_SYMBOL);
+    }
+
+    private static String tensPlaceNumeral(int arabicNumber) {
+        int hundredsPlace = (arabicNumber % 100) / 10;
+
+        return baseNumeralCalculator(hundredsPlace,
+                TENS_SYMBOL,
+                FIFTY_SYMBOL,
+                HUNDREDS_SYMBOL);
+    }
+
+    private static String baseNumeralCalculator(int hundredsPlace,
+                                                String basePlaceSymbol,
+                                                String fiveTimesBaseSymbol,
+                                                String nextPlaceSymbol) {
         if (hundredsPlace >= 1 && hundredsPlace <= 3) {
-            return HUNDREDS_SYMBOL.repeat(hundredsPlace);
+            return basePlaceSymbol.repeat(hundredsPlace);
         } else if (hundredsPlace == 4) {
-            return HUNDREDS_SYMBOL + FIVE_HUNDRED_SYMBOL;
+            return basePlaceSymbol + fiveTimesBaseSymbol;
         } else if (hundredsPlace == 5) {
-            return FIVE_HUNDRED_SYMBOL;
+            return fiveTimesBaseSymbol;
         } else if (hundredsPlace >= 6 && hundredsPlace <= 8) {
-            return FIVE_HUNDRED_SYMBOL + HUNDREDS_SYMBOL.repeat(Math.max(0, hundredsPlace - 5));
+            return fiveTimesBaseSymbol + basePlaceSymbol.repeat(Math.max(0, hundredsPlace - 5));
         } else if (hundredsPlace == 9) {
-            return HUNDREDS_SYMBOL + THOUSANDS_SYMBOL;
+            return basePlaceSymbol + nextPlaceSymbol;
         }
 
         return "";
-    }
-
-    private static String thousandsPlaceNumeral(int arabicNumber) {
-        int thousandsPlace = arabicNumber / 1000;
-        return THOUSANDS_SYMBOL.repeat(Math.max(0, thousandsPlace));
     }
 }
