@@ -1,13 +1,14 @@
 public class RomanNumeralCalculator {
     private static final String THOUSANDS_SYMBOL = "M";
+
     private static final String HUNDREDS_SYMBOL = "C";
     private static final String FIVE_HUNDRED_SYMBOL = "D";
+
     private static final String TENS_SYMBOL = "X";
     private static final String FIFTY_SYMBOL = "L";
+
     private static final String ONES_SYMBOL = "I";
     private static final String FIVE_SYMBOL = "V";
-
-
 
     public static String determineRomanNumeral(int arabicNumber) {
         return thousandsPlaceNumeral(arabicNumber) +

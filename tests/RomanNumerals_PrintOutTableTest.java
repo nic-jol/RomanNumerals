@@ -1,14 +1,13 @@
 package tests;
 
-import src.RomanNumerals;
-
+@Deprecated
 public class RomanNumerals_PrintOutTableTest
 {
     
     // Actual tests
     public static void main(String[] args)
     {
-        RomanNumerals number2 = new RomanNumerals();
+        src.OldRomanNumerals number2 = new src.OldRomanNumerals();
         number2.setIntegers();
 
         for (int i = 0; i < 3; i++)
